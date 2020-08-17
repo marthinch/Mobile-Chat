@@ -66,18 +66,18 @@ namespace MobileChat.ViewModels
                     while (true)
                     {
                         WebSocketReceiveResult result;
-                        var message = new ArraySegment<byte>(new byte[4096]);
+                        var arraySegment = new ArraySegment<byte>(new byte[4096]);
 
                         do
                         {
-                            result = await clientWebSocket.ReceiveAsync(message, cancellationTokenSource.Token);
-                            var messageBytes = message.Skip(message.Offset).Take(result.Count).ToArray();
+                            result = await clientWebSocket.ReceiveAsync(arraySegment, cancellationTokenSource.Token);
+                            var messageBytes = arraySegment.Skip(arraySegment.Offset).Take(result.Count).ToArray();
                             string serialisedMessae = Encoding.UTF8.GetString(messageBytes);
 
                             try
                             {
-                                var msg = JsonConvert.DeserializeObject<Message>(serialisedMessae);
-                                Messages.Add(msg);
+                                var message = JsonConvert.DeserializeObject<Message>(serialisedMessae);
+                                Messages.Add(message);
                             }
                             catch (Exception ex)
                             {

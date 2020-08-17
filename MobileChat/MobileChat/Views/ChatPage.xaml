@@ -3,7 +3,6 @@
     x:Class="MobileChat.Views.ChatPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:converters="clr-namespace:RetailerMobile.Converters"
     xmlns:local="clr-namespace:MobileChat.Views.Chat">
 
     <ContentPage.Resources>
@@ -67,4 +66,5 @@
         </StackLayout>
 
     </ContentPage.Content>
+
 </ContentPage>
