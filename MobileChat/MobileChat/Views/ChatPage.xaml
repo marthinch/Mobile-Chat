@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MobileChat.Views.ChatPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:RetailerMobile.Converters"
+    xmlns:local="clr-namespace:MobileChat.Views.Chat">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:MessageTemplateSelector x:Key="MessageTemplate" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+
+        <StackLayout>
+            <ListView
+                x:Name="MessagesListView"
+                HasUnevenRows="true"
+                ItemTemplate="{StaticResource MessageTemplate}"
+                ItemsSource="{Binding Messages}"
+                RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                       Property=Height,
+                                                                       Factor=1,
+                                                                       Constant=0}"
+                SeparatorVisibility="None" />
+            <Grid
+                Padding="5"
+                BackgroundColor="#EFEFF4"
+                ColumnSpacing="2"
+                HorizontalOptions="FillAndExpand"
+                RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToView,
+                                                                       ElementName=MessagesListView,
+                                                                       Property=Height,
+                                                                       Factor=.09,
+                                                                       Constant=0}"
+                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                      Property=Width,
+                                                                      Factor=1,
+                                                                      Constant=0}"
+                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView,
+                                                                  ElementName=MessagesListView,
+                                                                  Property=Height,
+                                                                  Factor=.91,
+                                                                  Constant=0}"
+                RowSpacing="1"
+                VerticalOptions="FillAndExpand">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Entry
+                    x:Name="EntryMessage"
+                    Grid.Column="0"
+                    HeightRequest="25"
+                    Placeholder="Message"
+                    Text="{Binding MessageText, Mode=TwoWay}" />
+
+                <Button
+                    Grid.Column="1"
+                    Command="{Binding SendCommand}"
+                    Text="Send" />
+
+            </Grid>
+        </StackLayout>
+
+    </ContentPage.Content>
+</ContentPage>

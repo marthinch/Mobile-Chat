@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ViewCell
+    x:Class="MobileChat.Views.Chat.OutgoingChat"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <ViewCell.View>
+        <Grid Padding="5" ColumnSpacing="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Frame
+                Grid.Row="0"
+                Grid.Column="1"
+                BackgroundColor="#F5F5F5"
+                HasShadow="False"
+                OutlineColor="Transparent">
+                <Label
+                    HorizontalTextAlignment="End"
+                    Text="{Binding Text}"
+                    TextColor="Black" />
+            </Frame>
+
+            <Label
+                Grid.Row="1"
+                Grid.Column="1"
+                FontSize="Micro"
+                HorizontalTextAlignment="End"
+                Text="{Binding MessagDateTime, StringFormat='{0:MM/dd/yyyy hh:mm tt}'}"
+                TextColor="Gray" />
+
+        </Grid>
+    </ViewCell.View>
+</ViewCell>
