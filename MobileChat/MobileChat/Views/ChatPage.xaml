@@ -54,6 +54,7 @@
                     x:Name="EntryMessage"
                     Grid.Column="0"
                     HeightRequest="25"
+                    Keyboard="Chat"
                     Placeholder="Message"
                     Text="{Binding MessageText, Mode=TwoWay}" />
 
