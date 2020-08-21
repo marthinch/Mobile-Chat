@@ -11,5 +11,11 @@ namespace MobileChat.Views.Chat
         {
             InitializeComponent();
         }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+        }
     }
 }

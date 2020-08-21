@@ -27,10 +27,18 @@
                 Grid.Row="1"
                 Grid.Column="0"
                 Orientation="Horizontal">
+
+                <Image
+                    x:Name="ImageChat"
+                    HeightRequest="100"
+                    Source="{Binding ImageFile}"
+                    WidthRequest="100" />
+
                 <Label
                     FontSize="Micro"
                     Text="{Binding Name}"
                     TextColor="Black" />
+
                 <Label
                     FontSize="Micro"
                     Text="{Binding MessagDateTime, StringFormat='{0:MM/dd/yyyy hh:mm tt}'}"

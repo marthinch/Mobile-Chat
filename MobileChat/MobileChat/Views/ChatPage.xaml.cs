@@ -1,4 +1,5 @@
-﻿using MobileChat.ViewModels;
+﻿using MobileChat.Models;
+using MobileChat.ViewModels;
 using System.Collections.Specialized;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -17,6 +18,20 @@ namespace MobileChat.Views
             chatViewModel = new ChatViewModel(userName);
 
             BindingContext = chatViewModel;
+
+            ((INotifyCollectionChanged)MessagesListView.ItemsSource).CollectionChanged += ChatPage_CollectionChanged;
+        }
+
+        public ChatPage(Message message)
+        {
+            InitializeComponent();
+
+            chatViewModel = new ChatViewModel();
+
+            BindingContext = chatViewModel;
+
+            if (message != null)
+                chatViewModel.Messages.Add(message);
 
             ((INotifyCollectionChanged)MessagesListView.ItemsSource).CollectionChanged += ChatPage_CollectionChanged;
         }

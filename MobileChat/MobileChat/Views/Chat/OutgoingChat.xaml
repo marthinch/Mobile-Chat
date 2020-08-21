@@ -20,10 +20,18 @@
                 BackgroundColor="#F5F5F5"
                 HasShadow="False"
                 OutlineColor="Transparent">
-                <Label
-                    HorizontalTextAlignment="End"
-                    Text="{Binding Text}"
-                    TextColor="Black" />
+                <StackLayout>
+                    <Image
+                        x:Name="ImageChat"
+                        HeightRequest="100"
+                        Source="{Binding ImageFile}"
+                        WidthRequest="100" />
+
+                    <Label
+                        HorizontalTextAlignment="End"
+                        Text="{Binding Text}"
+                        TextColor="Black" />
+                </StackLayout>
             </Frame>
 
             <Label

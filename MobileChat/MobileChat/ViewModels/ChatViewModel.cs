@@ -33,9 +33,10 @@ namespace MobileChat.ViewModels
         }
 
 
-        public ChatViewModel(string userName)
+        public ChatViewModel(string userName = null)
         {
-            this.userName = userName;
+            if (!string.IsNullOrEmpty(userName))
+                this.userName = userName;
 
             clientWebSocket = new ClientWebSocket();
             cancellationTokenSource = new CancellationTokenSource();
@@ -72,11 +73,11 @@ namespace MobileChat.ViewModels
                         {
                             result = await clientWebSocket.ReceiveAsync(arraySegment, cancellationTokenSource.Token);
                             var messageBytes = arraySegment.Skip(arraySegment.Offset).Take(result.Count).ToArray();
-                            string serialisedMessae = Encoding.UTF8.GetString(messageBytes);
+                            string serialisedMessage = Encoding.UTF8.GetString(messageBytes);
 
                             try
                             {
-                                var message = JsonConvert.DeserializeObject<Message>(serialisedMessae);
+                                var message = JsonConvert.DeserializeObject<Message>(serialisedMessage);
                                 Messages.Add(message);
                             }
                             catch (Exception ex)
@@ -110,15 +111,16 @@ namespace MobileChat.ViewModels
                     Name = userName,
                     MessagDateTime = DateTime.Now,
                     Text = MessageText,
-                    UserId = CrossDeviceInfo.Current.Id
+                    UserId = CrossDeviceInfo.Current.Id,
+                    ImageFile = "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Xamarin-logo.svg/1280px-Xamarin-logo.svg.png"
                 };
 
                 string serialisedMessage = JsonConvert.SerializeObject(message);
 
                 var byteMessage = Encoding.UTF8.GetBytes(serialisedMessage);
-                var segmnet = new ArraySegment<byte>(byteMessage);
+                var segment = new ArraySegment<byte>(byteMessage);
 
-                await clientWebSocket.SendAsync(segmnet, WebSocketMessageType.Text, true, cancellationTokenSource.Token);
+                await clientWebSocket.SendAsync(segment, WebSocketMessageType.Text, true, cancellationTokenSource.Token);
             }
             catch (Exception exception)
             {

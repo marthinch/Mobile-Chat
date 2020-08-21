@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
+using Matcha.BackgroundService.iOS;
 using UIKit;
 
 namespace MobileChat.iOS
@@ -25,7 +26,17 @@ namespace MobileChat.iOS
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
 
+            // Initialize background service
+            BackgroundAggregator.Init(this);
+
             return base.FinishedLaunching(app, options);
+        }
+
+        // Initialize notification tap
+        // https://github.com/thudugala/Plugin.LocalNotification/wiki/Usage-3.0.2
+        public override void WillEnterForeground(UIApplication uiApplication)
+        {
+            Plugin.LocalNotification.NotificationCenter.ResetApplicationIconBadgeNumber(uiApplication);
         }
     }
 }
